@@ -1,0 +1,8 @@
+kolla om value av parent
+om value != null
+    kolla value av rc och lc
+
+om rc.value != null
+    kolla value av rc och lc
+om lc.value != null
+    kolla value av rc och lc

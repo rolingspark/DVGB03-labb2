@@ -3,6 +3,7 @@
 import bst
 import avl
 import logging
+import sys
 
 log = logging.getLogger(__name__)
 #Is this working??!?!?
