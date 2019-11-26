@@ -27,16 +27,28 @@ class BST(bt.BT):
         '''
         Returns the number of nodes in the tree.
         '''
-        
-        logging.info("TODO@src/bst.py: implement size()")
-        return 0
+        if self.is_empty():
+            return 0
+        return 1 + self.lc().size() + self.rc().size()
+            
 
     def height(self):
         '''
         Returns the height of the tree.
         '''
-        logging.info("TODO@src/bst.py: implement height()")
-        return 0
+        if self.is_empty():
+            return 0
+        
+        else:
+            #Find the height of left and right subtree
+            l_height = self.lc().height()
+            r_height = self.rc().height()
+
+            #return whichever is the biggest
+            if (l_height > r_height):
+                return l_height + 1
+            else:
+                return r_height + 1
 
     def preorder(self):
         '''
@@ -74,7 +86,25 @@ class BST(bt.BT):
         [ 10, 5, 15, None, None, None, 20 ]
         '''
         log.info("TODO@src/bst.py: implement bfs_order_star()")
-        return []
+        if self.is_empty():
+            return ['none']
+        temp_queue = []
+        arr = []
+        temp_queue.append(self)
+
+        while(len(temp_queue) > 0):
+            if temp_queue[0].is_empty():
+                arr.append('none')
+            else:
+                arr.append(temp_queue[0].value())
+            self._value = temp_queue.pop(0)
+
+            if self._left_child is not None:
+                temp_queue.append(self.lc().value())
+            if self._right_child is not None:
+                temp_queue.append(self.rc().value())
+        return arr
+
 
     def add(self, v):
         '''
