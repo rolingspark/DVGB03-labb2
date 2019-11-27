@@ -87,22 +87,33 @@ class BST(bt.BT):
         '''
         log.info("TODO@src/bst.py: implement bfs_order_star()")
         if self.is_empty():
-            return ['none']
+            return []
+        
         temp_queue = []
         arr = []
         temp_queue.append(self)
-
+ 
         while(len(temp_queue) > 0):
-            if temp_queue[0].is_empty():
-                arr.append('none')
-            else:
-                arr.append(temp_queue[0].value())
-            self._value = temp_queue.pop(0)
+            
+            arr.append(temp_queue[0]._value),
+            parent = temp_queue.pop(0)
+            
+            if parent._left_child is not None:
+                temp_queue.append(parent.lc())
+            
+            if parent._right_child is not None:
+                temp_queue.append(parent.rc())
+            
+        counter = 0
+        for i in range(0, self.height()):
+            for j in range(0, 2*i):
+                if arr[counter] == None:
+                    arr.insert((counter*2)+1, None)
+                    arr.insert((counter*2)+2, None)
+                counter += 1
+        while(len(arr) > (2**self.height()-1)):
+            arr.pop()
 
-            if self._left_child is not None:
-                temp_queue.append(self.lc().value())
-            if self._right_child is not None:
-                temp_queue.append(self.rc().value())
         return arr
 
 
