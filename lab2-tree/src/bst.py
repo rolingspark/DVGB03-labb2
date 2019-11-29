@@ -20,8 +20,15 @@ class BST(bt.BT):
         '''
         Returns true if the value `v` is a member of the tree.
         '''
-        logging.info("TODO@src/bst.py: implement is_member()")
-        return False
+        if self.is_empty():
+            return False
+        
+        if v == self.value():
+            return True
+        elif v < self.value():
+            return self.lc().is_member(v)
+        elif v > self.value():
+            return self.rc().is_member(v)
 
     def size(self):
         '''
@@ -62,15 +69,18 @@ class BST(bt.BT):
         '''
         Returns a list of all members in inorder.
         '''
-        log.info("TODO@src/bst.py: implement inorder()")
-        return []
+        if self.is_empty():
+            return[]
+
+        return (self.lc().inorder() + [self.value()] + self.rc().inorder())
 
     def postorder(self):
         '''
         Returns a list of all members in postorder.
         '''
-        log.info("TODO@src/bst.py: implement postorder()")
-        return []
+        if self.is_empty():
+            return []
+        return (self.lc().inorder() + self.rc().inorder() + [self.value()])
 
     def bfs_order_star(self):
         '''
@@ -85,7 +95,7 @@ class BST(bt.BT):
         The output of t.bfs_order_star() should be:
         [ 10, 5, 15, None, None, None, 20 ]
         '''
-        log.info("TODO@src/bst.py: implement bfs_order_star()")
+        
         if self.is_empty():
             return []
         

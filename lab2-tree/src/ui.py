@@ -6,7 +6,6 @@ import logging
 import sys
 
 log = logging.getLogger(__name__)
-#Is this working??!?!?
 class TerminalUI:
     def __init__(self, mode):
         '''
