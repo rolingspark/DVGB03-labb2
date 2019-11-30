@@ -176,7 +176,25 @@ class TerminalUI:
         Shows a pretty 2D tree based on the output of bfs_order_star(). None
         values are are replaced by stars ("*").
         '''
-        log.info("TODO@src/ui.py: implement show_2d() using bfs_order_star()")
+        
+        #Get the tree as an array
+        arr = self._tree.bfs_order_star()
+        #Replace all spots that is None to *
+        printList = ['*' if x is None else x for x in arr]
+        #Saving height in variable for better readability
+        h = self._tree.height()
+        arr_counter = 0
+
+        for i in range (0, h):
+            #formula to calculate the space between every sign
+            #it is made to have 3 spaces in the bottom row so every fourth
+            #space there will be printed an element
+            spacing_between = (2**(h-i+1))-1
+            for j in range(0, 2**i):
+                
+                print("", str(printList[arr_counter]).center((spacing_between)), end= '')
+                arr_counter += 1
+            print("\n")
 
 if __name__ == "__main__":
     logging.critical("ui contains no main module")

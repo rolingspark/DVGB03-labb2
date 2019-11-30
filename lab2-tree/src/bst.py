@@ -116,7 +116,7 @@ class BST(bt.BT):
             
         counter = 0
         for i in range(0, self.height()):
-            for j in range(0, 2*i):
+            for j in range(0, 2**i):
                 if arr[counter] == None:
                     arr.insert((counter*2)+1, None)
                     arr.insert((counter*2)+2, None)
