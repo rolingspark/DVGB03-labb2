@@ -114,6 +114,14 @@ class BST(bt.BT):
             if parent._right_child is not None:
                 temp_queue.append(parent.rc())
             
+        
+
+        return self.none_fix(arr)
+
+    def none_fix(self, arr):
+        '''
+        Inserts None to make it possible to print a full tree to the bottom.
+        '''
         counter = 0
         for i in range(0, self.height()):
             for j in range(0, 2**i):
@@ -125,7 +133,6 @@ class BST(bt.BT):
             arr.pop()
 
         return arr
-
 
     def add(self, v):
         '''
@@ -147,6 +154,12 @@ class BST(bt.BT):
         If `v` is a non-member, the same tree is returned without modification.
         '''
         log.info("TODO@src/bst.py: implement delete()")
+        if self.is_member(v) is False:
+            return self
+        else:
+            
+
+
         return self
 
 if __name__ == "__main__":
