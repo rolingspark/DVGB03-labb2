@@ -165,6 +165,7 @@ class BST(bt.BT):
         elif (v > self.value()):
             return self.cons(self.lc(), self.rc().delete(v))
         
+            
 
         #When node have 1 or 0 children
         if self.lc().value() is None:
@@ -185,20 +186,30 @@ class BST(bt.BT):
             '''
             #Right subtree height bigger than Left
             if (self.lc().height() < self.rc().height()):   
-                node = self.min_value_node()                #get min value
-                self.set_value(node.value())                #set new value in the root.
-                return self.cons(self.lc, node.rc())        #return the new node with found from right and old one to be deleted
+                node = self.min_value_node()
+                self.set_value(node.value())            
                 
+                if node.rc().value() is not None:
+                    return self.cons(self.lc(), node.rc())
+                else:
+                    node.set_value(None)
+                    return self.cons(self.lc(), self.rc())       
+                self.rc().delete(node.value())
                 
             #Left subtree height bigger than left or they are the same height
             else:
-                node = self.max_value_node()                #Get max value node
-                self.set_value(node.value())                #Set new value in the root
-                return self.cons(node.lc(), self.rc())      #return the new node with found from right and old one to be deleted
+                node = self.max_value_node()
+                self.set_value(node.value())
+
+                if node.lc().value() is not None:
+                    return self.cons(node.lc(), self.rc())
+                else:
+                    node.set_value(None)
+                    return self.cons(self.lc(), self.rc())
+                
+                          
                 
 
-            
-        
         return self
     
     def min_value_node(self):
