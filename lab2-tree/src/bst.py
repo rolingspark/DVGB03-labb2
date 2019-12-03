@@ -184,9 +184,10 @@ class BST(bt.BT):
             has the bigger height to not cause more unbalance, if they are the 
             the same height always pick left
             '''
+            
             #Right subtree height bigger than Left
-            if (self.lc().height() < self.rc().height()):   
-                node = self.min_value_node()
+            if (self.lc().height() < self.rc().height()): 
+                node = self.rc().min_value_node()
                 self.set_value(node.value())            
                 
                 if node.rc().value() is not None:
@@ -198,7 +199,7 @@ class BST(bt.BT):
                 
             #Left subtree height bigger than left or they are the same height
             else:
-                node = self.max_value_node()
+                node = self.lc().max_value_node()
                 self.set_value(node.value())
 
                 if node.lc().value() is not None:
@@ -211,28 +212,30 @@ class BST(bt.BT):
                 
 
         return self
-    
+
+
     def min_value_node(self):
         '''
         traverse left in the tree until NULL and returns the
         last node that has a value
         '''
-        node = self.rc()
-        if node.lc().value() is not None:
-            return node.lc().min_value_node()
+        
+        if self.lc().value() is not None:
+            return self.lc().min_value_node()
         else:
-            return node
+            return self
 
     def max_value_node(self):
         '''
         Traverse right in the tree until NULL and returns the
         last node that has a value
         '''
-        node = self.lc()
-        if node.rc().value() is not None:
-            return node.rc().max_value_node()
+        
+        
+        if self.rc().value() is not None:
+            return self.rc().max_value_node()
         else:
-            return node
+            return self
 
 if __name__ == "__main__":
     log.critical("module contains no main module")
