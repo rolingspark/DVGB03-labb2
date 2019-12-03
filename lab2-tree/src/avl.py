@@ -22,16 +22,43 @@ class AVL(bst.BST):
         may remove this function and overide something else if you'd like.
         '''
         log.debug("calling bst.BST.add() explicitly from child")
-        self.balance() # TODO: apply this method correctly for add/delete
-        return bst.BST.add(self, v)
+        # TODO: apply this method correctly for add/delete
+        bst.BST.add(self, v)
+        
+        return self.balance()
+
+    def delete(self, v):
+        bst.BST.delete(self, v)
+
+        return self.balance()
 
     def balance(self):
         '''
         AVL-balances around the node rooted at `self`.  In other words, this
         method applies one of the following if necessary: slr, srr, dlr, drr.
         '''
+        if self.is_empty():
+            return self
+        
         if (abs(self.lc().height() - self.rc().height()) >= 2):
-            print("hej")
+            
+            if self.lc().height() > self.rc().height():
+                #case 1 or 2
+                if self.lc().lc().height() > self.lc().rc().height():
+                    #case 1 srr()
+                    return self.srr()
+                else:
+                    #case 2 drr()
+                    return self.drr()
+            else:
+                #case 3 or 4
+                if self.rc().lc().height() > self.rc().rc().height():
+                    #case3 dlr()
+                    return self.dlr()
+                else:
+                    #case 4 slr()
+                    return self.slr()
+
         
         return self
 
