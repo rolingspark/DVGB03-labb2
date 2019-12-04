@@ -80,7 +80,7 @@ class BST(bt.BT):
         '''
         if self.is_empty():
             return []
-        return (self.lc().inorder() + self.rc().inorder() + [self.value()])
+        return (self.lc().postorder() + self.rc().postorder() + [self.value()])
 
     def bfs_order_star(self):
         '''
@@ -177,6 +177,8 @@ class BST(bt.BT):
             temp = self.lc()
             self.set_value(None)
             return temp
+        
+        #When node has 2 children
         else:
             '''
             if node has 2 children get the the biggest node from left subtree
@@ -190,27 +192,36 @@ class BST(bt.BT):
                 node = self.rc().min_value_node()
                 self.set_value(node.value())            
                 
+                #check if the nodes have any children to the right and bring them up in the tree
                 if node.rc().value() is not None:
-                    return self.cons(self.lc(), node.rc())
+                    node.set_value(node.rc().value())
+                    node.cons(node.lc().rc(), node.rc().rc())
+                    return self.cons(self.lc(), self.rc())
+                #if not children assign NULL
                 else:
                     node.set_value(None)
+                    node.set_rc(None)
+                    node.set_lc(None)
                     return self.cons(self.lc(), self.rc())       
-                self.rc().delete(node.value())
+                
                 
             #Left subtree height bigger than left or they are the same height
             else:
                 node = self.lc().max_value_node()
                 self.set_value(node.value())
-
+                
+                #check if the nodes have any children to the left and bring them up in the tree
                 if node.lc().value() is not None:
-                    return self.cons(node.lc(), self.rc())
+                    node.set_value(node.lc().value())
+                    node.cons(node.lc().lc(), node.lc().rc())
+                    return self.cons(self.lc(), self.rc())
+                #if no children assign NULL
                 else:
                     node.set_value(None)
+                    node.set_rc(None)
+                    node.set_lc(None)
                     return self.cons(self.lc(), self.rc())
                 
-                          
-                
-
         return self
 
 

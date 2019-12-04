@@ -41,18 +41,21 @@ class AVL(bst.BST):
             return self
         
         if (abs(self.lc().height() - self.rc().height()) >= 2):
-            
+            #Check if left is heavier/deeper/higher
             if self.lc().height() > self.rc().height():
                 #case 1 or 2
-                if self.lc().lc().height() > self.lc().rc().height():
+                if self.lc().lc().height() >= self.lc().rc().height():
                     #case 1 srr()
                     return self.srr()
                 else:
                     #case 2 drr()
                     return self.drr()
+
+            #Check if right is heavier/deeper/higher
             else:
                 #case 3 or 4
-                if self.rc().lc().height() > self.rc().rc().height():
+                
+                if self.rc().lc().height() > self.rc().lc().height():
                     #case3 dlr()
                     return self.dlr()
                 else:
