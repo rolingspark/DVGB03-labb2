@@ -197,7 +197,7 @@ class BST(bt.BT):
                     node.set_value(node.rc().value())
                     node.cons(node.lc().rc(), node.rc().rc())
                     return self.cons(self.lc(), self.rc())
-                #if not children assign NULL
+                #if not children assign NULL and rebuild self
                 else:
                     node.set_value(None)
                     node.set_rc(None)
@@ -215,7 +215,7 @@ class BST(bt.BT):
                     node.set_value(node.lc().value())
                     node.cons(node.lc().lc(), node.lc().rc())
                     return self.cons(self.lc(), self.rc())
-                #if no children assign NULL
+                #if no children assign NULL and rebuild self
                 else:
                     node.set_value(None)
                     node.set_rc(None)

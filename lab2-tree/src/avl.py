@@ -21,13 +21,14 @@ class AVL(bst.BST):
         Example which shows how to override and call parent methods.  You
         may remove this function and overide something else if you'd like.
         '''
-        log.debug("calling bst.BST.add() explicitly from child")
-        # TODO: apply this method correctly for add/delete
         bst.BST.add(self, v)
         
         return self.balance()
 
     def delete(self, v):
+        """ 
+        Deletes desired value then checks if there is still balance in ther tree
+         """
         bst.BST.delete(self, v)
 
         return self.balance()
