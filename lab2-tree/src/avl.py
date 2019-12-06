@@ -52,11 +52,11 @@ class AVL(bst.BST):
                     #case 2 drr()
                     return self.drr()
 
-            #Check if right is heavier/deeper/higher
+            #right is heavier/deeper/higher
             else:
                 #case 3 or 4
                 
-                if self.rc().lc().height() > self.rc().lc().height():
+                if self.rc().lc().height() > self.rc().rc().height():
                     #case3 dlr()
                     return self.dlr()
                 else:

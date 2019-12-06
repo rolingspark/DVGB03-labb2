@@ -48,13 +48,14 @@ class BST(bt.BT):
         
         else:
             #Find the height of left and right subtree
+
             l_height = self.lc().height()
             r_height = self.rc().height()
 
             #return whichever is the biggest
-            if (l_height > r_height):
+            if (l_height >= r_height):
                 return l_height + 1
-            else:
+            elif (l_height < r_height):
                 return r_height + 1
 
     def preorder(self):
@@ -192,12 +193,13 @@ class BST(bt.BT):
                 node = self.rc().min_value_node()
                 self.set_value(node.value())            
                 
-                #check if the nodes have any children to the right and bring them up in the tree
+                # if the nodes have any children to the right bring them up in the tree
                 if node.rc().value() is not None:
                     node.set_value(node.rc().value())
-                    node.cons(node.lc().rc(), node.rc().rc())
+                    node.cons(node.rc().lc(), node.rc().rc())
+                    #node.rc().set_value(None)
                     return self.cons(self.lc(), self.rc())
-                #if not children assign NULL and rebuild self
+                #if no children assign NULL and rebuild self
                 else:
                     node.set_value(None)
                     node.set_rc(None)

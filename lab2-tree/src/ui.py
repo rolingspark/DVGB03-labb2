@@ -185,39 +185,15 @@ class TerminalUI:
         h = self._tree.height()
         arr_counter = 0
 
-        #Get the biggest value from the tree to make extra space
-        #in case there is more than one digit in the number
-        number_length_max = self.get_biggest_number()
-
         for i in range (0, h):
             #Formula to calculate space inbetween the nodes, is scalable depending on the
             #amount of characters in the biggest number in the tree that is gonna print
-            spacing_between = (2**(h-i+1))-1  + ((len(str(number_length_max)) - 1) * 2**(h-i+1))
+            spacing_between = 2**(h-i+1)-1
             for j in range(0, 2**i):
                 
                 print("", str(printList[arr_counter]).center((spacing_between)), end= '')
                 arr_counter += 1
             print("\n")
-
-    #Get's the biggest value node in the tree
-    def get_biggest_number(self):
-        """ 
-        Returns the value of the largest node in the tree 0 if there
-        is a single node tree
-         """
-        max_left = 0
-        max_right = 0
-        if self._tree.lc().value() is not None:
-            max_left = self._tree.lc().max_value_node().value()
-        if self._tree.rc().value() is not None:
-            max_right = self._tree.rc().max_value_node().value()
-
-        if max_left > max_right:
-            return max_left
-        elif max_left < max_right:
-            return max_right
-
-        return 0
 
 
 if __name__ == "__main__":
